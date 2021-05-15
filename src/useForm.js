@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 const useForm = (callback) => {
   const [values, setValues] = useState({ email: '', password: '' })
+  const [errors, setErrors] = useState({ email: '', password: '' })
+  const [validations, setValidations] = useState({ email: '', password: '' })
 
   const handleChange = event => {
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import useForm from './useForm'
+import { InputCell } from './FormGroup'
 
 const Form = () => {
   const submit = () => {
@@ -12,6 +13,16 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      <Example
+          type={"email"}
+          name={"email"}
+          defaultValue={values.email}
+          placeholder={"Email"}
+          onChange={handleChange}
+          errors={errors.login}
+          isValid={validations.login.valid}
+          isDirty={validations.login.dirty}
+        />
       <div className="form-group">
         <label>Email address</label>
         <input
