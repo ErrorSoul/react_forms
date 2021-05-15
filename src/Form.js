@@ -1,24 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
+import useForm from './useForm'
 
 const Form = () => {
-
-  const [values, setValues] = useState({ email: 'sdsd', password: '' })
-
-  const handleChange = event => {
-
-    const { name, value } = event.target
-    console.log("name : ", name);
-    console.log("value : ", value);
-    setValues({
-      ...values,
-      [name]: value
-    })
-  }
-
-  const handleSubmit = event => {
-    event.preventDefault();
+  const submit = () => {
     console.log('success')
   }
+
+  const { handleChange, handleSubmit, values } = useForm(submit)
 
 
 

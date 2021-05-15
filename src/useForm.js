@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 
 
-const useForm = () => {
-  const [values, setValues] = useState({ email: 'sdsd', password: '' })
+const useForm = (callback) => {
+  const [values, setValues] = useState({ email: '', password: '' })
 
   const handleChange = event => {
 
@@ -18,7 +18,7 @@ const useForm = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log('success')
+    callback();
   }
 
 
@@ -30,3 +30,5 @@ const useForm = () => {
   }
 
 }
+
+export default useForm;
