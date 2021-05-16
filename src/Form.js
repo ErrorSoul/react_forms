@@ -1,25 +1,17 @@
-import React from 'react'
-import useForm from './useForm'
-import { InputCell } from './FormGroup'
+import React from "react";
+import useForm from "./useForm";
+import { InputCell } from "./FormGroup";
 
 const Form = () => {
   const submit = () => {
-    console.log('success')
-  }
+    console.log("success");
+  };
 
-  const {
-    handleChange,
-    handleSubmit,
-    values,
-    errors,
-    validations
-  } = useForm(submit)
-
-
+  const { handleChange, handleSubmit, values, errors, validations, formValid } =
+    useForm(["email", "password"], submit);
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-
       <div className="form-group">
         <label>Email address</label>
         <InputCell
@@ -48,11 +40,11 @@ const Form = () => {
         />
       </div>
 
-      <button type="submit" className="btn btn-primary">Submit</button>
+      <button disabled={!formValid} type="submit" className="btn btn-primary">
+        Submit
+      </button>
     </form>
-
-  )
-}
-
+  );
+};
 
 export default Form;

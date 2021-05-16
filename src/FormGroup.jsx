@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 
 const FeedBack = (props) => (
-  <FormFeedback className={props.isValid ? "" : "v-f"}>
+  <FormFeedback className={props.isValid ? "" : "d-block"}>
     {props.errorText}
   </FormFeedback>
 );

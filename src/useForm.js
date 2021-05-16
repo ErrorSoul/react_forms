@@ -1,26 +1,32 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback) => {
-  const [values, setValues] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: "", password: "" });
-  const pre_validations = {
-    email: {
-      dirty: false,
-      valid: false,
-    },
+const useForm = (names, callback) => {
+  const preErrorData = Object.fromEntries(names.map((name) => [name, ""]));
+  const [values, setValues] = useState(preErrorData);
+  const [errors, setErrors] = useState(preErrorData);
+  const [formValid, setFormValid] = useState(false);
 
-    password: {
-      dirty: false,
-      valid: false,
-    },
-  };
+  // const pre_validations = {
+  //   email: {
+  //     dirty: false,
+  //     valid: false,
+  //   },
 
-  const [validations, setValidations] = useState(pre_validations);
+  //   password: {
+  //     dirty: false,
+  //     valid: false,
+  //   },
+  // };
+  const preValidationData = names.reduce(
+    (acc, target) => ({ ...acc, [target]: { dirty: false, valid: false } }),
+    {}
+  );
+
+  const [validations, setValidations] = useState(preValidationData);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("name : ", name);
-    console.log("value : ", value);
+
     setValues({
       ...values,
       [name]: value,
@@ -28,14 +34,17 @@ const useForm = (callback) => {
     validateField(name, value);
   };
 
+  const validateForm = () => {
+    setFormValid(Object.keys(values).every((elem) => validations[elem].valid));
+  };
+
   const validateField = (fieldName, value) => {
-    console.log('fieldName : ', fieldName);
+    //console.log('fieldName : ', fieldName);
     let errorsFields = errors;
     let loginValid = validations.email.valid;
     let passwordValid = validations.password.valid;
     let validationFields = validations;
-    console.log('validations', validationFields)
-
+    //console.log('validations', validationFields)
 
     validationFields[fieldName].dirty = true;
     switch (fieldName) {
@@ -54,9 +63,10 @@ const useForm = (callback) => {
       default:
         break;
     }
-    console.log('errors', errorsFields)
+    //console.log('errors', errorsFields)
     setErrors(errorsFields);
     setValidations(validationFields);
+    validateForm();
   };
 
   useEffect(() => {
@@ -70,6 +80,9 @@ const useForm = (callback) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     callback();
+    setErrors(preErrorData);
+    setValidations(preValidationData);
+    setFormValid(false);
   };
 
   return {
@@ -78,6 +91,7 @@ const useForm = (callback) => {
     values,
     errors,
     validations,
+    formValid,
   };
 };
 
