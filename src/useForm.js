@@ -30,36 +30,42 @@ const useForm = (callback) => {
 
   const validateField = (fieldName, value) => {
     console.log('fieldName : ', fieldName);
-    let errors = {};
+    let errorsFields = errors;
     let loginValid = validations.email.valid;
     let passwordValid = validations.password.valid;
     let validationFields = validations;
     console.log('validations', validationFields)
 
+
     validationFields[fieldName].dirty = true;
     switch (fieldName) {
       case "email":
         let emailValid = value.length > 0;
-        errors.email = emailValid ? "" : "Неправильный формат email";
+        errorsFields.email = emailValid ? "" : "Неправильный формат email";
         validationFields[fieldName].valid = emailValid;
         break;
 
       case "password":
         let passwordValid = value.length >= 6;
-        errors.password = passwordValid ? "" : "Пароль слишком короткий";
+        errorsFields.password = passwordValid ? "" : "Пароль слишком короткий";
         validationFields[fieldName].valid = passwordValid;
         break;
 
       default:
         break;
     }
-    setErrors(errors);
+    console.log('errors', errorsFields)
+    setErrors(errorsFields);
     setValidations(validationFields);
   };
 
   useEffect(() => {
     console.log("use Effect is started");
   }, [values]);
+
+  useEffect(() => {
+    console.log("Errors: ", errors);
+  }, [errors]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
