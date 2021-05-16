@@ -7,52 +7,47 @@ const Form = () => {
     console.log('success')
   }
 
-  const { handleChange, handleSubmit, values } = useForm(submit)
+  const {
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    validations
+  } = useForm(submit)
 
 
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <Example
+
+      <div className="form-group">
+        <label>Email address</label>
+        <InputCell
           type={"email"}
           name={"email"}
           defaultValue={values.email}
           placeholder={"Email"}
           onChange={handleChange}
-          errors={errors.login}
-          isValid={validations.login.valid}
-          isDirty={validations.login.dirty}
+          errors={errors.email}
+          isValid={validations.email.valid}
+          isDirty={validations.email.dirty}
         />
-      <div className="form-group">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="exampleInputEmail1"
-          name='email'
-          value={values.email}
-          onChange={handleChange}
-          aria-describedby="emailHelp"/>
       </div>
 
       <div className="form-group">
         <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
+        <InputCell
+          type={"password"}
+          name={"password"}
+          defaultValue={values.password}
+          placeholder={"Password"}
           onChange={handleChange}
-          id="exampleInputPassword1"/>
+          errors={errors.password}
+          isValid={validations.password.valid}
+          isDirty={validations.password.dirty}
+        />
       </div>
 
-
-      <div className="form-group form-check">
-        <input
-          value={values.password}
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"/>
-        <label className="form-check-label">Check me out</label>
-      </div>
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>
 
