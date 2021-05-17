@@ -13,7 +13,7 @@ module ReactForms
 
 
     def names_string
-      names.join(", ")
+      names.to_s
     end
 
 
