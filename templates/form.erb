@@ -8,7 +8,7 @@ const Form = () => {
   };
 
   const { handleChange, handleSubmit, values, errors, validations, formValid } =
-    useForm([<%= names %>], submit);
+    useForm([<%= names_string %>], submit);
 
   return (
     <form onSubmit={handleSubmit} noValidate>

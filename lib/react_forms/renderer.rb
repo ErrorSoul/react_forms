@@ -6,7 +6,7 @@ module ReactForms
 
    attr_reader :name, :names
 
-    def initialize
+    def initialize(names, name: nil)
       @name = name
       @names = names
     end
