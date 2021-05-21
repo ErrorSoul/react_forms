@@ -29,7 +29,7 @@ const InputCell = (props) => {
         placeholder={props.placeholder}
         onChange={props.onChange}
         className={classNames}
-        defaultValue={props.defaultValue}
+        value={props.value}
         valid={isValid}
         invalid={!isValid && isDirty}
         type={props.type}

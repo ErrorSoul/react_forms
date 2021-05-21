@@ -6,7 +6,7 @@ const Form = () => {
   const submit = () => {
 
     console.log("success")
-    return {answer: 'error', data: {email: 'la la la la'}}
+    return {answer: 'err', data: {email: 'la la la la'}}
   };
   const newCallback = () => {
     console.log('callback');
@@ -16,14 +16,14 @@ const Form = () => {
     useForm(["email", "password"], submit, newCallback);
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} >
       <div className="form-group">
-        <label>Email address</label>
+        <label>{values.email}</label>
         <InputCell
           type={"email"}
           name={"email"}
-          defaultValue={values.email}
-          placeholder={"Email"}
+          value={values.email}
+          placeholder={"Esssmail"}
           onChange={handleChange}
           errors={errors.email}
           isValid={validations.email.valid}
@@ -36,7 +36,7 @@ const Form = () => {
         <InputCell
           type={"password"}
           name={"password"}
-          defaultValue={values.password}
+          value={values.password}
           placeholder={"Password"}
           onChange={handleChange}
           errors={errors.password}

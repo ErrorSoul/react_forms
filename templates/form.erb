@@ -2,32 +2,38 @@ import React from "react";
 import useForm from "./useForm";
 import { InputCell } from "./FormGroup";
 const Form = () => {
-const submit = () => {
-console.log("success");
-};
-const { handleChange, handleSubmit, values, errors, validations, formValid } =
-  useForm(<%= names_string %>, submit);
-return (
-  <form onSubmit={handleSubmit} noValidate>
-  <% names.each do |name| %>
-    <div className="form-group">
-      <label><%= name.capitalize %></label>
-      <InputCell
-        type={"<%= name %>"}
-        name={"<%= name %>"}
-        defaultValue={values.<%= name %>}
-        placeholder={ "<%= name.capitalize %>" }
-        onChange={handleChange}
-        errors={errors.<%= name %>}
-        isValid={validations.<%= name %>.valid}
-        isDirty={validations.<%= name %>.dirty}
-      />
-    </div>
-   <% end %>
-   <button disabled={!formValid} type="submit" className="btn btn-primary">
-   Submit
-   </button>
-</form>
-);
-};
+  const submit = () => {
+    console.log("success");
+  };
+
+  const callback = () => {
+    console.log("success");
+  };
+
+  const { handleChange, handleSubmit, values, errors, validations, formValid } =
+    useForm(<%= names_string %>, submit, callback);
+
+    return (
+      <form onSubmit={handleSubmit} noValidate>
+      <% names.each do |name| %>
+        <div className="form-group">
+          <label><%= name.capitalize %></label>
+          <InputCell
+            type={"<%= name %>"}
+            name={"<%= name %>"}
+            defaultValue={values.<%= name %>}
+            placeholder={ "<%= name.capitalize %>" }
+            onChange={handleChange}
+            errors={errors.<%= name %>}
+            isValid={validations.<%= name %>.valid}
+            isDirty={validations.<%= name %>.dirty}
+          />
+        </div>
+       <% end %>
+       <button disabled={!formValid} type="submit" className="btn btn-primary">
+         Submit
+       </button>
+      </form>
+      );
+    };
 export default Form;
