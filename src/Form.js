@@ -4,11 +4,16 @@ import { InputCell } from "./FormGroup";
 
 const Form = () => {
   const submit = () => {
-    console.log("success");
+
+    console.log("success")
+    return {answer: 'error', data: {email: 'la la la la'}}
   };
+  const newCallback = () => {
+    console.log('callback');
+  }
 
   const { handleChange, handleSubmit, values, errors, validations, formValid } =
-    useForm(["email", "password"], submit);
+    useForm(["email", "password"], submit, newCallback);
 
   return (
     <form onSubmit={handleSubmit} noValidate>

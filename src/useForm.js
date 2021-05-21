@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (names, callback) => {
+const useForm = (names, submit, callback) => {
   const preErrorData = Object.fromEntries(names.map((name) => [name, ""]));
   const [values, setValues] = useState(preErrorData);
   const [errors, setErrors] = useState(preErrorData);
@@ -77,12 +77,28 @@ const useForm = (names, callback) => {
     console.log("Errors: ", errors);
   }, [errors]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    callback();
+  const setInit = () => {
     setErrors(preErrorData);
     setValidations(preValidationData);
+    console.log("setInit completed");
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { answer, data } = submit(values);
     setFormValid(false);
+
+    if (answer == "error") {
+      for (let [key, value] of Object.entries(data)) {
+        validations[key].valid = false;
+      }
+
+      setErrors(data);
+      setValidations(validations);
+    } else {
+      setInit();
+      callback();
+    }
   };
 
   return {
