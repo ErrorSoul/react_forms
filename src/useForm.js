@@ -40,22 +40,30 @@ const useForm = (names, submit, callback) => {
 
   const validateField = (fieldName, value) => {
     let errorsFields = errors
-    let loginValid = validations.email.valid
-    let passwordValid = validations.password.valid
     let validationFields = validations
+    let nameValidation = validationFields[fieldName]
+    let nameValid = nameValidation.valid
 
-    validationFields[fieldName].dirty = true
+    nameValidation.dirty = true
+    //validationFields[fieldName].dirty = true
+
     switch (fieldName) {
       case 'email':
-        let emailValid = value.length > 0
-        errorsFields.email = emailValid ? '' : 'Неправильный формат email'
-        validationFields[fieldName].valid = emailValid
+        nameValid = value.length > 0
+        errorsFields.email = nameValid ? '' : 'Неправильный формат email'
+        nameValidation.valid = nameValid
+        break
+
+      case 'login':
+        nameValid = value.length >= 3
+        errorsFields.login = nameValid ? '' : 'Неправильный формат login'
+        nameValidation.valid = nameValid
         break
 
       case 'password':
-        let passwordValid = value.length >= 6
-        errorsFields.password = passwordValid ? '' : 'Пароль слишком короткий'
-        validationFields[fieldName].valid = passwordValid
+        nameValid = value.length >= 6
+        errorsFields.password = nameValid ? '' : 'Пароль слишком короткий'
+        nameValidation.valid = nameValid
         break
 
       default:

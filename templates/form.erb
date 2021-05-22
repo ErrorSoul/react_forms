@@ -1,5 +1,6 @@
 import React from "react";
 import useForm from "./useForm";
+
 import { InputCell } from "./FormGroup";
 const Form = () => {
   const submit = () => {
@@ -17,11 +18,11 @@ const Form = () => {
       <form onSubmit={handleSubmit} noValidate>
       <% names.each do |name| %>
         <div className="form-group">
-          <label><%= name.capitalize %></label>
+	  <label><%= name.capitalize %></label>
           <InputCell
-            type={"<%= name %>"}
+            type={"<%= name_type(name) %>"}
             name={"<%= name %>"}
-            defaultValue={values.<%= name %>}
+            value={values.<%= name %>}
             placeholder={ "<%= name.capitalize %>" }
             onChange={handleChange}
             errors={errors.<%= name %>}
