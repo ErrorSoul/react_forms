@@ -1,11 +1,6 @@
 import React from "react";
 import useForm from "./useForm";
-import {
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup
-}
-import { InputCell } from "./FormGroup"
+import { InputGroupCell } from "./InputCell"
 
 
 const Form = () => {
@@ -23,26 +18,16 @@ const Form = () => {
     return (
       <form onSubmit={handleSubmit} noValidate>
       <% names.each do |name| %>
-        <div className="form-group">
-	  <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                <i className="nc-icon nc-single-02" />
-              </InputGroupText>
-            </InputGroupAddon>
-
-            <InputCell
-              type={"<%= name_type(name) %>"}
-	      name={"<%= name %>"}
-	      value={values.<%= name %>}
-	      placeholder={ "<%= name.capitalize %>" }
-	      onChange={handleChange}
-	      errors={errors.<%= name %>}
-	      isValid={validations.<%= name %>.valid}
-	      isDirty={validations.<%= name %>.dirty}
-            />
-	  <InputGroup>
-        </div>
+        <InputGroupCell
+	  type={"<%= name_type(name) %>"}
+	  name={"<%= name %>"}
+	  value={values.<%= name %>}
+	  placeholder={ "<%= name.capitalize %>" }
+	  onChange={handleChange}
+	  errors={errors.<%= name %>}
+	  isValid={validations.<%= name %>.valid}
+	  isDirty={validations.<%= name %>.dirty}
+	/>
        <% end %>
        <button disabled={!formValid} type="submit" className="btn btn-primary">
          Submit

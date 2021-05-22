@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
-import Form from './GenForm'
+import Form from './NewForm'
 
 function App() {
   return (

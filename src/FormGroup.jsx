@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   FormGroup,
   Label,
@@ -6,21 +6,21 @@ import {
   FormText,
   FormFeedback,
   CustomInput,
-} from "reactstrap";
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+} from 'reactstrap'
 
 const FeedBack = (props) => (
-  <FormFeedback className={props.isValid ? "" : "d-block"}>
+  <FormFeedback className={props.isValid ? '' : 'd-block'}>
     {props.errorText}
   </FormFeedback>
-);
+)
 
 const InputCell = (props) => {
-  const isValid = !!props.isValid;
-  const { isDirty } = props;
-  const classNames = [
-    "border-top-0 border-right-0 border-left-0 my-input-border",
-    props.className,
-  ].join(" ");
+  const isValid = !!props.isValid
+  const { isDirty } = props
+  const classNames = ['', props.className].join(' ')
   return (
     <FormGroup className={props.formGroupClassName}>
       <FeedBack isValid={isValid} errorText={props.errors} />
@@ -40,7 +40,38 @@ const InputCell = (props) => {
         max={props.max}
       />
     </FormGroup>
-  );
-};
+  )
+}
 
-export { InputCell };
+const InputGroupCell = (props) => {
+  const isValid = !!props.isValid
+  const { isDirty } = props
+  const classNames = ['', props.className].join(' ')
+
+  return (
+    <InputGroup>
+      <InputGroupAddon addonType="prepend">
+        <InputGroupText>
+          <i className={props.iconClass} />
+        </InputGroupText>
+      </InputGroupAddon>
+      <Input
+        name={props.name}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        className={classNames}
+        value={props.value}
+        valid={isValid}
+        invalid={!isValid && isDirty}
+        type={props.type}
+        maxLength={props.maxlength}
+        minLength={props.minlength}
+        readOnly={props.readonly}
+        min={props.min}
+        max={props.max}
+      />
+    </InputGroup>
+  )
+}
+
+export { InputCell, InputGroupCell }

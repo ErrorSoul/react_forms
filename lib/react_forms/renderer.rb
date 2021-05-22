@@ -1,4 +1,4 @@
-require "erb"
+require 'erb'
 
 module ReactForms
   class Renderer
@@ -15,15 +15,20 @@ module ReactForms
     end
 
     def name_type(name)
-      %w[email password].include?(name) ? name : "text"
+      %w[email password].include?(name) ? name : 'text'
+    end
+
+    def render_name
+      input_group ? 'input_group_form' : 'form'
     end
 
     def render
-      ERB.new(File.read("templates/form.erb")).result(binding)
+      puts render_name
+      ERB.new(File.read("templates/#{render_name}.erb")).result(binding)
     end
 
     def render_to_file
-      File.open("my_file_erb.jsx", "wb") do |f|
+      File.open('my_file_erb.jsx', 'wb') do |f|
         f.puts render
       end
     end
