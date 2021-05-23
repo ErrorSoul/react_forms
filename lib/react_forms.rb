@@ -10,4 +10,4 @@ module ReactForms
 
 end
 names = %w[login password]
-ReactForms::Renderer.new(names, input_group: true).render_to_file
+ReactForms::Renderer.new(names, input_group: false).render_to_file
