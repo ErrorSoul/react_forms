@@ -1,11 +1,15 @@
 import React from "react";
 import useForm from "./useForm";
 import { InputGroupCell } from "./InputCell"
-
+import AppDataManager from "components/AppDataManager";
 
 const Form = () => {
-  const submit = () => {
-    console.log("success");
+  const submit = (values) => {
+    console.log("Submit has been called");
+    return AppDataManager.api("/login_norm", {
+      method: "POST",
+      parameters: { suser: values },
+    });
   };
 
   const callback = () => {
