@@ -109,7 +109,7 @@ const useForm = (names, submit, callback) => {
       return;
     }
     setInit();
-    callback();
+    callback(json);
   };
 
   return {
