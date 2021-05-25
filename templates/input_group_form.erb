@@ -1,0 +1,42 @@
+import React from "react";
+import useForm from "./useForm";
+import { InputGroupCell } from "./InputCell"
+import AppDataManager from "components/AppDataManager";
+
+const Form = () => {
+  const submit = (values) => {
+    console.log("Submit has been called");
+    return AppDataManager.api("/login_norm", {
+      method: "POST",
+      parameters: { suser: values },
+    });
+  };
+
+  const callback = () => {
+    console.log("success");
+  };
+
+  const { handleChange, handleSubmit, values, errors, validations, formValid } =
+    useForm(<%= names_string %>, submit, callback);
+
+    return (
+      <form onSubmit={handleSubmit} noValidate>
+      <% names.each do |name| %>
+        <InputGroupCell
+	  type={"<%= name_type(name) %>"}
+	  name={"<%= name %>"}
+	  value={values.<%= name %>}
+	  placeholder={ "<%= name.capitalize %>" }
+	  onChange={handleChange}
+	  errors={errors.<%= name %>}
+	  isValid={validations.<%= name %>.valid}
+	  isDirty={validations.<%= name %>.dirty}
+	/>
+       <% end %>
+       <button disabled={!formValid} type="submit" className="btn btn-primary">
+         Submit
+       </button>
+      </form>
+      );
+    };
+export default Form;

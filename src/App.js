@@ -1,15 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
-import Form from './Form.js'
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
+import Form from './NewForm'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Form/>
+        <Form />
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

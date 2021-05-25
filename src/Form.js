@@ -1,52 +1,55 @@
-import React from 'react'
-import useForm from './useForm'
+import React from "react";
+import useForm from "./useForm";
+import { InputCell } from "./FormGroup";
 
 const Form = () => {
   const submit = () => {
-    console.log('success')
+
+    console.log("success")
+    return {answer: 'err', data: {email: 'la la la la'}}
+  };
+  const newCallback = () => {
+    console.log('callback');
   }
 
-  const { handleChange, handleSubmit, values } = useForm(submit)
-
-
+  const { handleChange, handleSubmit, values, errors, validations, formValid } =
+    useForm(["email", "password"], submit, newCallback);
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form onSubmit={handleSubmit} >
       <div className="form-group">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="exampleInputEmail1"
-          name='email'
+        <label>{values.email}</label>
+        <InputCell
+          type={"email"}
+          name={"email"}
           value={values.email}
+          placeholder={"Esssmail"}
           onChange={handleChange}
-          aria-describedby="emailHelp"/>
+          errors={errors.email}
+          isValid={validations.email.valid}
+          isDirty={validations.email.dirty}
+        />
       </div>
 
       <div className="form-group">
         <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          onChange={handleChange}
-          id="exampleInputPassword1"/>
-      </div>
-
-
-      <div className="form-group form-check">
-        <input
+        <InputCell
+          type={"password"}
+          name={"password"}
           value={values.password}
-          type="checkbox"
-          className="form-check-input"
-          id="exampleCheck1"/>
-        <label className="form-check-label">Check me out</label>
+          placeholder={"Password"}
+          onChange={handleChange}
+          errors={errors.password}
+          isValid={validations.password.valid}
+          isDirty={validations.password.dirty}
+        />
       </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
+
+      <button disabled={!formValid} type="submit" className="btn btn-primary">
+        Submit
+      </button>
     </form>
-
-  )
-}
-
+  );
+};
 
 export default Form;
